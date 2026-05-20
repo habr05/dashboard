@@ -1,8 +1,7 @@
 import { cn } from "@utils/helpers";
 import Image from "next/image";
 import * as React from "react";
-import NetBirdLogoMark from "@/assets/netbird.svg";
-import NetBirdLogoFull from "@/assets/netbird-full.svg";
+import { useBrandingConfig } from "@/hooks/useBrandingConfig";
 
 type Props = {
   size?: "default" | "large";
@@ -21,19 +20,21 @@ const sizes = {
 };
 
 export const NetBirdLogo = ({ size = "default", mobile = true }: Props) => {
+  const { branding } = useBrandingConfig();
+
   return (
     <>
       <Image
-        src={NetBirdLogoFull}
+        src={branding.APP_LOGO_FULL}
         height={sizes[size].desktop}
-        alt={"NetBird Logo"}
+        alt={`${branding.APP_NAME} Logo`}
         className={cn(mobile && "hidden md:block")}
       />
       {mobile && (
         <Image
-          src={NetBirdLogoMark}
+          src={branding.APP_LOGO_MARK}
           width={sizes[size].mobile}
-          alt={"NetBird Logo"}
+          alt={`${branding.APP_NAME} Logo`}
           className={cn(mobile && "md:hidden ml-4")}
         />
       )}
